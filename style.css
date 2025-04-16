@@ -42,13 +42,12 @@ body {
 
 .search {
   font-size: 1rem;
-  width: 25rem;
-  padding: 0.5rem 2rem;
-  border-radius: 1rem;
+  width: 30rem;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  border-radius: 10px;
   border: none;
   color: white;
 }
@@ -63,8 +62,35 @@ body {
 .search_icon {
   position: absolute;
   right: 3%;
-  width: 2rem;
+  width: 1.9rem;
   height: auto;
   aspect-ratio: 16/9;
-  color: rgba(255, 255, 255, 0.699);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media screen and (max-width: 500px) {
+  .search {
+    width: 80%;
+  }
+
+  .wrapper_input_search {
+    width: 100%;
+  }
+
+  .search_icon {
+    right: 15%;
+    width: 1.7rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .search {
+    font-size: 0.7rem;
+    width: 80%;
+  }
+
+  .search_icon {
+    right: 15%;
+    width: 1.3rem;
+  }
 }
