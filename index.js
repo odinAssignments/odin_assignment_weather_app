@@ -10,7 +10,7 @@ import { getMainWeatherTag } from "./utils/weather_data/index.js";
 import { weather_data, weather_icon } from "./api/index.js";
 
 export async function loadWeatherFromCity(city) {
-  const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline//${city}?key=Secret`;
+  const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline//${city}?key=TCZG9GXBM96ZN8UAYUV7HV3C8`;
   const options = { method: "GET" };
 
   try {
@@ -73,4 +73,17 @@ export async function loadWeatherFromCity(city) {
   }
 }
 
-loadWeatherFromCity("paris");
+const input_dom = document.querySelector(".container_form");
+
+input_dom.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const searchValue = document.querySelector(".search");
+
+  if (!searchValue.value.trim() || !isNaN(searchValue.value.trim())) {
+    return;
+  }
+
+  loadWeatherFromCity(searchValue.value);
+  searchValue.value = "";
+});
