@@ -1,6 +1,5 @@
 export const weather_data = {
   city: "",
-  time: "",
   date: "",
   current_degree: "",
   degree_min: "",

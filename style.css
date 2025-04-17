@@ -68,7 +68,73 @@ body {
   color: rgba(255, 255, 255, 0.7);
 }
 
+.cards_container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.card_current_weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 50%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  color: white;
+}
+
+.card_current_weather h5 {
+  font-size: 2rem;
+}
+
+.card_current_weather p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.current_weather_detail h5 {
+  font-size: 4rem;
+}
+.current_weather_detail p {
+  font-size: 1rem;
+}
+
+.wrapper_current_weather_detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.img_current_weather {
+  width: 12rem;
+  height: auto;
+}
+
 @media screen and (max-width: 500px) {
+  .cards_container {
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card_current_weather,
+  .current_weather_detail {
+    width: 100%;
+  }
+
   .search {
     width: 80%;
   }
