@@ -83,6 +83,18 @@ li {
   padding-right: 15px;
 }
 
+@-webkit-keyframes blob {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .card_current_weather,
 .card_detail_weather,
 .card_forecast_weather {
@@ -98,6 +110,7 @@ li {
   -webkit-backdrop-filter: blur(4px);
   border: none;
   color: white;
+  animation: 0.81s linear 0s forwards alternate blob;
 }
 
 .card_current_weather h5 {
@@ -187,11 +200,21 @@ li {
 }
 
 @media screen and (max-width: 500px) {
+  body {
+    background: linear-gradient(180deg, rgba(23, 139, 248, 0.986) 70.71%),
+      linear-gradient(
+        0deg,
+        rgb(142, 157, 172),
+        rgba(23, 139, 248, 0.986) 70.71%
+      ),
+      linear-gradient(rgba(80, 84, 92, 0.8), rgba(76, 79, 83, 0.801) 70.71%);
+  }
   .cards_container {
     gap: 2rem;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    padding-bottom: 5rem;
   }
 
   .card_current_weather,
