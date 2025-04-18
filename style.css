@@ -113,6 +113,18 @@ li {
   animation: 0.81s linear 0s forwards alternate blob;
 }
 
+.card_current_weather {
+  display: none;
+}
+
+.container_cards_right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 50%;
+  display: none;
+}
+
 .card_current_weather h5 {
   font-size: 2rem;
 }
@@ -139,13 +151,6 @@ li {
 .img_current_weather {
   width: 13rem;
   height: auto;
-}
-
-.container_cards_right {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 50%;
 }
 
 .card_detail_weather {

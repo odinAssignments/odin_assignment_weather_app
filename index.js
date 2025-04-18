@@ -9,7 +9,7 @@ import { getMainWeatherTag } from "./utils/weather_data/index.js";
 
 import { weather_data, weather_icon } from "./api/index.js";
 
-export async function loadWeatherFromCity(city) {
+export async function tryLoadWeatherFromCity(city) {
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline//${city}?key=TCZG9GXBM96ZN8UAYUV7HV3C8`;
   const options = { method: "GET" };
 
@@ -67,9 +67,10 @@ export async function loadWeatherFromCity(city) {
     console.log("----------- Forecast for 5 days -----------");
     console.log("days_forecast_data : ", days_forecast_data);
 
-    console.log(result);
+    return true;
   } catch (error) {
     console.log(error);
+    return false;
   }
 }
 
@@ -84,6 +85,17 @@ input_dom.addEventListener("submit", (e) => {
     return;
   }
 
-  loadWeatherFromCity(searchValue.value);
-  searchValue.value = "";
+  if (tryLoadWeatherFromCity(searchValue.value)) {
+    searchValue.value = "";
+
+    const card_left_container = document.querySelector(".card_current_weather");
+    const cards_right_container = document.querySelector(
+      ".container_cards_right"
+    );
+
+    card_left_container.style.display = "flex";
+    cards_right_container.style.display = "flex";
+
+    // todo fill the data...
+  }
 });
