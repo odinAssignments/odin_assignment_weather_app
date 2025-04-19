@@ -10,7 +10,7 @@ import {
   getMainWeatherTag,
 } from "./utils/weather_data/index.js";
 
-import { days_forecast_data, weather_data, weather_icon } from "./api/index.js";
+import { days_forecast_data, weather_data } from "./api/index.js";
 
 export async function tryLoadWeatherFromCity(city) {
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline//${city}?key=TCZG9GXBM96ZN8UAYUV7HV3C8`;
@@ -61,20 +61,20 @@ export async function tryLoadWeatherFromCity(city) {
       });
     }
 
-    console.log("----------- Today's Weather  -----------");
-    console.log(weather_data.date);
-    console.log("current degree :", weather_data.current_degree);
-    console.log("degree min : ", weather_data.degree_min);
-    console.log("degree max : ", weather_data.degree_max);
-    console.log("weather : ", weather_data.weather);
+    // console.log("----------- Today's Weather  -----------");
+    // console.log(weather_data.date);
+    // console.log("current degree :", weather_data.current_degree);
+    // console.log("degree min : ", weather_data.degree_min);
+    // console.log("degree max : ", weather_data.degree_max);
+    // console.log("weather : ", weather_data.weather);
 
-    console.log("----------- Today's Weather Details -----------");
-    console.log("humidity :", weather_data.humidity);
-    console.log("winds speed :", weather_data.wind_speed);
-    console.log("uv index :", weather_data.uv_index);
+    // console.log("----------- Today's Weather Details -----------");
+    // console.log("humidity :", weather_data.humidity);
+    // console.log("winds speed :", weather_data.wind_speed);
+    // console.log("uv index :", weather_data.uv_index);
 
-    console.log("----------- Forecast for 5 days -----------");
-    console.log("days_forecast_data : ", days_forecast_data);
+    // console.log("----------- Forecast for 5 days -----------");
+    // console.log("days_forecast_data : ", days_forecast_data);
 
     return true;
   } catch (error) {
