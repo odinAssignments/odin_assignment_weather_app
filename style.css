@@ -127,6 +127,7 @@ li {
 
 .card_current_weather h5 {
   font-size: 2rem;
+  text-align: center;
 }
 
 .card_current_weather p {

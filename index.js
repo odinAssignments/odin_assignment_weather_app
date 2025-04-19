@@ -95,8 +95,6 @@ input_dom.addEventListener("submit", async (e) => {
   }
 
   if (await tryLoadWeatherFromCity(searchValue.value)) {
-    searchValue.value = "";
-
     const card_left_container = document.querySelector(".card_current_weather");
     const cards_right_container = document.querySelector(
       ".container_cards_right"
@@ -116,12 +114,16 @@ input_dom.addEventListener("submit", async (e) => {
     const dom_detail_humidity = document.getElementById("humidity");
     const dom_detail_uv_index = document.getElementById("uv_index");
 
+    const dom_city = document.getElementById("city");
+
     const forecastItems = document.querySelectorAll(
       ".wrapper_forecast_weather li"
     );
 
     card_left_container.style.display = "flex";
     cards_right_container.style.display = "flex";
+
+    dom_city.textContent = weather_data.city;
 
     // Current weather card data :
     dom_current_datetime.textContent = weather_data.date;
@@ -153,5 +155,7 @@ input_dom.addEventListener("submit", async (e) => {
         tempEl.textContent = data.temp;
       }
     });
+
+    searchValue.value = "";
   }
 });
