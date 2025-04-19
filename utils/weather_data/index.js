@@ -16,11 +16,12 @@ export function getIconWeatherByTag(tag) {
       return weather_icon.rain;
     case "cloud":
       return weather_icon.cloud;
+    case "sunny":
     case "sun":
       return weather_icon.sun;
     case "snow":
       return weather_icon.snow;
     default:
-      return weather_icon.sun;
+      return weather_icon.cloud;
   }
 }
