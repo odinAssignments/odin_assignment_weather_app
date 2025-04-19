@@ -25,18 +25,18 @@
     <div class="card_current_weather">
       <section class="datetime">
         <h5>Current Weather</h5>
-        <p>Thursday, April 17, 2025</p>
+        <p id="datetime">Thursday, April 17, 2025</p>
       </section>
 
       <div>
-        <img class="img_current_weather" src="https://notrelix.github.io/weather-wave/199f8a4d87a1b4071133.png"
-          alt="weather image">
+        <img id="current_img_weather" class="img_current_weather"
+          src="https://notrelix.github.io/weather-wave/199f8a4d87a1b4071133.png" alt="weather image">
       </div>
 
       <div class="wrapper_current_weather_detail">
         <section class="current_weather_detail">
-          <h5>11°c</h5>
-          <p>5°c / 15°c | Clouds</p>
+          <h5 id="current_weather_degree">11°c</h5>
+          <p id="current_weather_min_max_degree">5°c / 15°c | Clouds</p>
         </section>
       </div>
     </div>
@@ -46,23 +46,18 @@
         <p class="card_title">Today's Weather Detail</p>
         <ul class="container_detail_weather_items">
           <li class="item_wrapper_weather_detail">
-            <p>Rain Probability</p>
-            <p>100%</p>
-          </li>
-
-          <li class="item_wrapper_weather_detail">
             <p>Wind Speed</p>
-            <p>14.6Km/h</p>
+            <p id="wind_speed">14.6Km/h</p>
           </li>
 
           <li class="item_wrapper_weather_detail">
             <p>Humidity</p>
-            <p>62%</p>
+            <p id="humidity">62%</p>
           </li>
 
           <li class="item_wrapper_weather_detail">
             <p>UV Index</p>
-            <p>6</p>
+            <p id="uv_index">6</p>
           </li>
         </ul>
       </div>

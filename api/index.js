@@ -11,6 +11,8 @@ export const weather_data = {
   uv_index: 0,
 };
 
+export const days_forecast_data = [];
+
 export const weather_icon = {
   rain: "https://notrelix.github.io/weather-wave/2da6410f7691db9044d3.png",
   cloud: "https://notrelix.github.io/weather-wave/199f8a4d87a1b4071133.png",

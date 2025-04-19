@@ -5,9 +5,12 @@ import {
   fahrenheitToCelsius,
 } from "./utils/converter/index.js";
 
-import { getMainWeatherTag } from "./utils/weather_data/index.js";
+import {
+  getIconWeatherByTag,
+  getMainWeatherTag,
+} from "./utils/weather_data/index.js";
 
-import { weather_data, weather_icon } from "./api/index.js";
+import { days_forecast_data, weather_data, weather_icon } from "./api/index.js";
 
 export async function tryLoadWeatherFromCity(city) {
   const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline//${city}?key=TCZG9GXBM96ZN8UAYUV7HV3C8`;
@@ -31,6 +34,10 @@ export async function tryLoadWeatherFromCity(city) {
       result.days[0].tempmax
     )}°C`;
 
+    weather_data.weather_icon = getIconWeatherByTag(
+      getMainWeatherTag(result.days[0])
+    );
+
     weather_data.city = toPascalCase(city);
     weather_data.date = `${daysNumberToLetter(
       result.days[0]
@@ -42,13 +49,15 @@ export async function tryLoadWeatherFromCity(city) {
     weather_data.wind_speed = `${result.days[0].windspeed}Km/h`;
 
     // forecast_data :
-    const days_forecast_data = [];
+    days_forecast_data.length = 0;
     for (let i = 0; i < 5; i++) {
       days_forecast_data.push({
         day: daysNumberToLetter(result.days[i]).slice(0, 3),
         weather: getMainWeatherTag(result.days[i]),
-        tempMin: `${fahrenheitToCelsius(result.days[i].tempmin)}°C`,
-        tempMax: `${fahrenheitToCelsius(result.days[i].tempmax)}°C`,
+        icon: getIconWeatherByTag(getMainWeatherTag(result.days[i])),
+        temp: `${fahrenheitToCelsius(
+          result.days[i].tempmin
+        )}°c ${fahrenheitToCelsius(result.days[i].tempmax)}°c`,
       });
     }
 
@@ -76,7 +85,7 @@ export async function tryLoadWeatherFromCity(city) {
 
 const input_dom = document.querySelector(".container_form");
 
-input_dom.addEventListener("submit", (e) => {
+input_dom.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const searchValue = document.querySelector(".search");
@@ -85,17 +94,64 @@ input_dom.addEventListener("submit", (e) => {
     return;
   }
 
-  if (tryLoadWeatherFromCity(searchValue.value)) {
+  if (await tryLoadWeatherFromCity(searchValue.value)) {
     searchValue.value = "";
 
     const card_left_container = document.querySelector(".card_current_weather");
     const cards_right_container = document.querySelector(
       ".container_cards_right"
     );
+    const dom_current_datetime = document.getElementById("datetime");
+    const dom_current_img_weather = document.getElementById(
+      "current_img_weather"
+    );
+    const dom_current_degree = document.getElementById(
+      "current_weather_degree"
+    );
+    const dom_current_min_max_degree = document.getElementById(
+      "current_weather_min_max_degree"
+    );
+
+    const dom_detail_wind_speed = document.getElementById("wind_speed");
+    const dom_detail_humidity = document.getElementById("humidity");
+    const dom_detail_uv_index = document.getElementById("uv_index");
+
+    const forecastItems = document.querySelectorAll(
+      ".wrapper_forecast_weather li"
+    );
 
     card_left_container.style.display = "flex";
     cards_right_container.style.display = "flex";
 
-    // todo fill the data...
+    // Current weather card data :
+    dom_current_datetime.textContent = weather_data.date;
+    dom_current_img_weather.src = weather_data.weather_icon;
+    dom_current_degree.textContent = weather_data.current_degree;
+    dom_current_min_max_degree.textContent = `${weather_data.degree_min.toLowerCase()} / ${weather_data.degree_max.toLowerCase()} | ${
+      weather_data.weather
+    }`;
+
+    // Detail weather data :
+    dom_detail_wind_speed.textContent = weather_data.wind_speed;
+    dom_detail_humidity.textContent = weather_data.humidity;
+    dom_detail_uv_index.textContent = weather_data.uv_index;
+
+    // Forecast weather data :
+    forecastItems.forEach((item, index) => {
+      const data = days_forecast_data[index];
+
+      if (data) {
+        const dayEl = item.querySelector("p:nth-of-type(1)");
+        const imgEl = item.querySelector("img");
+        const weatherEl = item.querySelector("p:nth-of-type(2)");
+        const tempEl = item.querySelector("p:nth-of-type(3)");
+
+        dayEl.textContent = data.day;
+        imgEl.src = data.icon;
+        imgEl.alt = data.weather.toLowerCase();
+        weatherEl.textContent = data.weather;
+        tempEl.textContent = data.temp;
+      }
+    });
   }
 });
